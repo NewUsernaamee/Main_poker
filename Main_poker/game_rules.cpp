@@ -33,11 +33,8 @@ GameRules::GameRules(Hand hand)
         this->hand = hand;
 }
 
-
 GameRules::~GameRules()
 {}
-
-
 
 Hand GameRules::CheckStreet ()
 {

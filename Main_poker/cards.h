@@ -40,8 +40,8 @@ private:
 public:
    Cost GetCost();
    Suit GetSuit();
-   Card SetCost(Cost cost);
-   Card SetSuit(Suit suit);
+   Card& SetCost(Cost cost);
+   Card& SetSuit(Suit suit);
    Card(Suit suit,Cost cost);
    Card(Cost cost,Suit suit);
    Card(); 

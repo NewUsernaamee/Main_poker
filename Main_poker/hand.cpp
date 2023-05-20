@@ -13,7 +13,7 @@ std::ostream& operator << (std::ostream &out,Hand &Hand)
     return out;
   }
 
- Hand::Hand(Deck deck)
+Hand::Hand(Deck deck)
 { 
   for (int i = 0; i < 7; i++)
   {
@@ -21,37 +21,37 @@ std::ostream& operator << (std::ostream &out,Hand &Hand)
   }
 }
 
- Card Hand::GetCard(int i)
+Card Hand::GetCard(int i)
  {
      return card[i];
  }
 
- Hand Hand::SetCard(int i,Card NewCard)
+Hand Hand::SetCard(int i,Card NewCard)
  {
      card[i] = NewCard;
      return *this;
  }
 
- Card Hand::SetCard(int i)
+Card Hand::SetCard(int i)
  {
      return card[i];
  }
 
- Hand::Iterator Hand::Begin()
+Hand::Iterator Hand::Begin()
  {
-     Hand::Iterator iterBegin(*this);
+    Hand::Iterator iterBegin(*this);
 
-     return iterBegin;
+    return iterBegin;
  }
 
- Hand::Iterator Hand::End()
+Hand::Iterator Hand::End()
  {
-     Hand::Iterator iterEnd(*this);
-     iterEnd.SetCurrent(7);
-     return iterEnd;
+    Hand::Iterator iterEnd(*this);
+    iterEnd.SetCurrent(7);
+    return iterEnd;
  }
 
- Hand Hand::Sort()
+/*Hand Hand::Sort()
 {
   Card temp;
   int size=7;
@@ -68,7 +68,7 @@ std::ostream& operator << (std::ostream &out,Hand &Hand)
     }
   }
   return *this; 
-}
+}*/
 
 Hand::Hand()
 { 
@@ -95,6 +95,7 @@ bool Hand::operator==(Hand hand)
 
 
 }
+
 
 int Hand::GetPair()
 {
@@ -176,6 +177,35 @@ const Card& Hand::Iterator::operator*() const
     return *current;
 }
 
+Card& Hand::Iterator::operator[](int n)
+{
+    return *(this->current+n);
+}
+
+Card& Hand::Iterator::operator[](int n) const
+{
+    return *(this->current+n);
+}
+
+Card& Hand::Iterator::operator->()
+{
+    return *current;
+}
+
+Card& Hand::Iterator::operator->() const
+{
+    return *current;
+}
+
+Hand::Iterator Hand::Iterator::operator+(Iterator it) const
+{
+    Hand::Iterator NewIter = *this;
+    int diff = NewIter.current - it.current;
+    
+
+    return NewIter;
+}
+
 Hand::Iterator& Hand::Iterator::operator++()
 {
     current += 1;
@@ -184,25 +214,24 @@ Hand::Iterator& Hand::Iterator::operator++()
 
 Hand::Iterator Hand::Iterator::operator+(int x)const
 {
-    Hand::Iterator NewIter=*this;
-    NewIter.current = NewIter.current + x;
-    
-    return NewIter;
+    Hand::Iterator NewIter = *this;
+    NewIter.current += x;
+    return *this;
 }
 
 Hand::Iterator Hand::Iterator::operator-( int x) const
 {
     Hand::Iterator NewIter = *this;
-    NewIter.current = NewIter.current - x;
-    return NewIter;
+    NewIter.current -= x;
+    return *this;
 }
 
 Hand::Iterator Hand::Iterator::operator-(Hand::Iterator x) const
 {
-    Hand::Iterator NewIter=*this;
+    Hand::Iterator NewIter = *this;
     int diff = NewIter.current - x.current;
-    NewIter -= diff;
-   
+
+
     return NewIter;
 }
 
@@ -257,6 +286,14 @@ bool Hand::Iterator::operator==(Iterator it) const
     return true;
 }
 
+Hand::Iterator& Hand::Iterator::operator+=(Iterator x)
+{
+
+    int diff = this->current - x.current;
+    this->current += diff;
+    return *this;
+}
+
 Hand::Iterator& Hand::Iterator::operator+=(int x)
 {
     
@@ -278,16 +315,16 @@ Hand::Iterator& Hand::Iterator::operator--()
     return *this;
 }
 
-Hand::Iterator Hand::Iterator::operator++(int x)
+Hand::Iterator& Hand::Iterator::operator++(int x)
 {
     current++;
     return *this;
 }
 
-Hand::Iterator Hand::Iterator::operator--(int x)
+Hand::Iterator& Hand::Iterator::operator--(int x)
 {
-    current++;
-    return Iterator();
+    current--;
+    return *this;
 }
 
 bool Hand::Iterator::operator!=(Iterator it) const

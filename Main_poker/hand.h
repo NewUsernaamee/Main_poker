@@ -5,7 +5,8 @@
 
 //хранение руки
 class Hand
-{ private:
+{
+private:
   Card card[7];
   int pair = 0, three = 0, four = 0;
   bool street = false, flash = false;
@@ -25,7 +26,6 @@ public:
   void SetFour();
   void SetFlash();
   void SetStreet();
-  
   bool operator >(Hand hand);
   bool operator==(Hand hand);
 	class Iterator
@@ -34,31 +34,38 @@ public:
 		Card* current;
 	public:
 		void SetCurrent(int x);
+		Iterator(Hand& hand);
+		Iterator();
+		Iterator& operator = (const Iterator&) = default;
 		Card& operator *();
 		const Card& operator *() const;
-		Iterator& operator ++();
+		Card& operator [] (int n);
+		Card& operator [] (int n) const ;
+		Card& operator -> ();
+		Card& operator -> () const;
+		Iterator operator +(Iterator it) const;
 		Iterator operator +(int x) const;
 		Iterator operator -(Iterator x) const;
 		Iterator operator -(const int x) const;
-		Iterator (Hand& hand);
-		Iterator();
-		Iterator& operator-=(int x); // +=   -- -= реалезовать все
-		bool operator !=(Iterator it) const ;
 		bool operator < (Iterator it) const;
-		bool operator >(Iterator it) const;
-		bool operator >=(Iterator it) const;
-		bool operator <=(Iterator it) const;
-		bool operator ==(Iterator it) const;
-		Iterator& operator +=(int x);
-		Iterator& operator -=(Iterator x);
-		Iterator& operator --();
-		Iterator operator ++(int x);
-		Iterator operator --(int x);
+		bool operator > (Iterator it) const;
+		bool operator != (Iterator it) const ;
+		bool operator >= (Iterator it) const;
+		bool operator <= (Iterator it) const;
+		bool operator == (Iterator it) const;
+		Iterator& operator += (Iterator x);
+		Iterator& operator += (int x);
+		Iterator& operator -= (int x);
+		Iterator& operator -= (Iterator x);
+		Iterator& operator ++ ();
+		Iterator& operator -- ();
+		Iterator& operator ++ (int x);
+		Iterator& operator -- (int x);
 	};
 	
-friend std::ostream& operator << (std::ostream &out,Hand &PartDeck);
-Iterator Begin();
-Iterator End();
-Hand Sort();// operator > || < Card
+  friend std::ostream& operator << (std::ostream &out,Hand &PartDeck);
+  Iterator Begin();
+  Iterator End();
+  Hand Sort();
 };
 

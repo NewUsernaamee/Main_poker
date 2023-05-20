@@ -11,12 +11,12 @@
 
 //создание псевдослучайного числа
 
-int RandomInt(int min, int max)
+
+struct
 {
-    int x;
-    x = min + std::rand() / ((RAND_MAX + 1u) / (max - min));
-    return x;
+    bool operator()(Card a, Card b) const { return a < b; }
 }
+customLess;
 
 //запуск игры
 void BeginGame()
@@ -24,16 +24,16 @@ void BeginGame()
     
     Session game;
     Hand FirstPlayer = game.Deal();
-    for (Hand::Iterator it = FirstPlayer.Begin(); it < FirstPlayer.End(); it++)
+    /*for (Hand::Iterator it = FirstPlayer.Begin(); it != FirstPlayer.End(); it++)
     {
         std::cout << *it;
-    }
+    }*/
     std::cout << std::endl;
     std::cout << FirstPlayer << std::endl;// написать свой цикл  и свою сортировку через итеры
-   // std::sort(FirstPlayer.Begin(), FirstPlayer.End());
-    FirstPlayer.Sort();
+    std::sort(FirstPlayer.Begin(), FirstPlayer.End(),customLess);//посомтреть реализации итераторов
+    //FirstPlayer.Sort();
     std::cout << FirstPlayer;
-  /*  Combinations comb(FirstPlayer);
+    Combinations comb(FirstPlayer);
     Hand Copy(FirstPlayer);
     GameRules cheker(Copy);
     cheker.Check4();
@@ -41,7 +41,7 @@ void BeginGame()
     cheker.Check2();
     cheker=Copy;
     cheker.CheckStreet();
-    cheker.IsFlesh();*/
+    cheker.IsFlesh();
 }
 
 

@@ -2,6 +2,14 @@
 #include "deck.h"
 #include "cards.h"
 
+int RandomInt(int min, int max)
+{
+    int x;
+    x = min + std::rand() / ((RAND_MAX + 1u) / (max - min));
+    return x;
+}
+
+
 std::ostream& operator << (std::ostream &out,Deck &Deck)
 {
   for (int i = 0; i < 52; i++)

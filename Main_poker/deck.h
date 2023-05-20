@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Cards.h"
 //#include "hand.h"
-
+int RandomInt(int min, int max);
 class Deck
 { private:
     Card card[52];
@@ -11,6 +11,7 @@ class Deck
 	Deck();
 	Card GetCard(int x);
 	void Shufle();
+	
     friend std::ostream& operator << (std::ostream &out,Deck &Deck);
   class Iterator
   {

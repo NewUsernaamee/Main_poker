@@ -42,13 +42,13 @@ Suit Card::GetSuit()
     return this->suit;
 }
 
-Card Card::SetCost(Cost cost)
+Card& Card::SetCost(Cost cost)
 {
     this->cost = cost;
     return *this;
 }
 
-Card Card::SetSuit(Suit suit)
+Card& Card::SetSuit(Suit suit)
 {
     this->suit = suit;
     return *this;
