@@ -34,14 +34,21 @@ std::string ToChar(Suit suit);
 
 class Card
 {
-  public:
+private:
   Suit suit;
   Cost cost;
-  Card(Suit suit,Cost cost);
-  Card(Cost cost,Suit suit);
-  Card(); 
-  friend std::ostream& operator << (std::ostream &out,Card &Card);
-  bool operator > (Card card);
+public:
+   Cost GetCost();
+   Suit GetSuit();
+   Card SetCost(Cost cost);
+   Card SetSuit(Suit suit);
+   Card(Suit suit,Cost cost);
+   Card(Cost cost,Suit suit);
+   Card(); 
+   friend std::ostream& operator << (std::ostream &out,Card &Card);
+   bool operator < (Card& card)const;
+   bool operator > (Card& card)const;
+   bool comp(Card card,Card card2);
   };
 
 

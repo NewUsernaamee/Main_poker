@@ -1,12 +1,11 @@
+#pragma once
 #include "hand.h"
 
 class GameRules
 {
-public:
+private:
  Hand hand;
- int pair = 0, three = 0, four = 0;
- bool street = false, flash = false;
-
+public:
     GameRules();
 
     ~GameRules();
@@ -24,8 +23,6 @@ public:
     GameRules(Hand hand);
     
     friend std::ostream& operator << (std::ostream& out, GameRules chek);
-    
-    bool operator < (GameRules checker);
 
 };
 

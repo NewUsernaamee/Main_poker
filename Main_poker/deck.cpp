@@ -46,15 +46,14 @@ Deck::Iterator& Deck::Iterator::operator+(int x)
     return *this;
 }
 
-Deck::Iterator::Iterator(Hand& hand)
-{
-    current = hand.card;
-}
 
 Deck::Iterator::Iterator(Deck& deck)
 {
     current = deck.card;
 }
+
+
+
 
 void Deck::Shufle()
 {
@@ -70,4 +69,9 @@ void Deck::Shufle()
     }
         
     
+}
+
+Card Deck::GetCard(int x)
+{
+    return card[x];
 }

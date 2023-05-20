@@ -1,4 +1,5 @@
-﻿#include <algorithm>
+﻿#pragma once
+#include <algorithm>
 #include <iostream>
 #include <ctime>
 #include "deck.h"
@@ -8,9 +9,8 @@
 #include "hand.h"
 #include "Session.h"
 
-
-//
 //создание псевдослучайного числа
+
 int RandomInt(int min, int max)
 {
     int x;
@@ -20,33 +20,28 @@ int RandomInt(int min, int max)
 
 //запуск игры
 void BeginGame()
-{
-    Deck deck;
-    //Session 
-    deck.Shufle();
-    Hand topSeven(deck);
-    Deck::Iterator it(deck);
-    Deck::Iterator itEnd(deck);
-    itEnd = itEnd + 7;
-    std::cout<< std::endl << *itEnd << std::endl;
-  //  std::sort(it,itE)
-    topSeven.Sort();
-    Combinations comb(topSeven);
-    Hand Copy;
-    std::cout << comb;
-    Copy.CopyHand(topSeven);
+{  
+    
+    Session game;
+    Hand FirstPlayer = game.Deal();
+    for (Hand::Iterator it = FirstPlayer.Begin(); it < FirstPlayer.End(); it++)
+    {
+        std::cout << *it;
+    }
+    std::cout << std::endl;
+    std::cout << FirstPlayer << std::endl;// написать свой цикл  и свою сортировку через итеры
+   // std::sort(FirstPlayer.Begin(), FirstPlayer.End());
+    FirstPlayer.Sort();
+    std::cout << FirstPlayer;
+  /*  Combinations comb(FirstPlayer);
+    Hand Copy(FirstPlayer);
     GameRules cheker(Copy);
     cheker.Check4();
     cheker.Check3();
     cheker.Check2();
     cheker=Copy;
     cheker.CheckStreet();
-    cheker.IsFlesh();
-    /*deck.Shufle
-    Hand topSeven;
-    topSeven.TakeHand(deck);*/
-   
-    
+    cheker.IsFlesh();*/
 }
 
 
@@ -55,10 +50,6 @@ void BeginGame()
 int main()
 {
     std::srand(time(0));
-
     BeginGame();
     return 0;
-
 }
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"

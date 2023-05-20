@@ -2,10 +2,13 @@
 #include "deck.h"
 #include "hand.h"
 class Session
-{
+{	
+private:
 	Deck deck;
 public:
-	Hand Deal(Deck deck);//раздача
-	//void Winner();//сравнение
+	Session();
+	Hand Deal();//раздача
+	void Winner(Hand hand,Hand hand2);//сравнение
+	Deck GetDeck();//возможно лишний
 };
 
